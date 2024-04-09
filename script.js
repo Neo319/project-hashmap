@@ -131,6 +131,38 @@ class HashMap {
     clear () { //removes all entries in the hashmap
         this.buckets = [];
     }
+
+    keys () { //returns array with all keys
+        let output = []
+
+        let current = this.buckets[0];
+        const length = this.buckets.length;
+
+        for (let i = 0; i <= length; i++) {
+            current = this.buckets[i];
+            while(current) {
+                output.push(current.key)
+                current = current.next;
+            }
+        }
+        return output;
+    }
+
+    values () {
+        let output = []
+
+        let current = this.buckets[0];
+        const length = this.buckets.length;
+
+        for (let i = 0; i <= length; i++) {
+            current = this.buckets[i];
+            while(current) {
+                output.push(current.data)
+                current = current.next;
+            }
+        }
+        return output; 
+    }
 }
 
 class Node {
@@ -162,6 +194,6 @@ myHashMap.set("Ero", "I am a hamster!")
 // console.log(myHashMap.has("Tinker Bell")) //false
 // console.log(myHashMap.has("Ero")) // true
 
-console.log(myHashMap.length())
+console.log(myHashMap.values())
 
 console.log(myHashMap);
