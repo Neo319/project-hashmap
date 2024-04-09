@@ -10,7 +10,7 @@ class HashMap {
         this.buckets = [];
     }
 
-    hash(key) { //takes a given key and returns the corresponding hash
+    hash (key) { //takes a given key and returns the corresponding hash
         let hashCode = 0;
             
         const primeNumber = 31;
@@ -63,7 +63,21 @@ class HashMap {
         }
     }
 
+    has (key) { // returns true if the hashmap contains the key, or else false
+        const index = (this.hash(key))
 
+        if (this.buckets[index]) { // the index is found
+            let current = this.buckets[index]
+
+            while (current !== null) {
+                if (key === current.key) { // the correct key is found
+                    return true;
+                } else 
+                current = current.next;
+            }
+        }
+        return false; // if either the index is not found, or the key is not found at the index
+    }
 }
 
 class Node {
@@ -90,5 +104,9 @@ myHashMap.set("Seath", "I am a dragon RAWR")
 myHashMap.set("Ero", "I am a hamster!")
 
 console.log(myHashMap.get("Ero"))
+
+console.log(myHashMap.has("Gill")) // true
+console.log(myHashMap.has("Tinker Bell")) //false
+console.log(myHashMap.has("Ero")) // true
 
 console.log(myHashMap)
