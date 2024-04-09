@@ -78,6 +78,41 @@ class HashMap {
         }
         return false; // if either the index is not found, or the key is not found at the index
     }
+
+    remove (key) { //removes a given key from the hashmap, or else returns false
+        if (this.has(key)) { // index is found
+            const index = this.hash(key); 
+            let current = this.buckets[index]
+            
+            
+            if (current.next === null) { // he linked list is of size 1 
+                if (current.key === key) { //the key is found
+                    delete this.buckets[index] // remove array item without splicing
+                    return true;
+                } else {//the key is not found
+                    return false;
+                }
+            } else { // the linked list is > 1 length
+                while (current !== null) {
+                    console.log("loop")
+                    console.log(current.next.key, key)
+                    
+                    if (current.next.key === key) { //key is next
+                        console.log('yes')
+                        current.next = current.next.next; //replaces item with comes after, or else null
+                        return true;
+                    }
+                    else if (current.key === key) { //key is current
+                        console.log('no')
+                        this.buckets[index] = current.next; //replaces first item with next
+                        return true;
+                    } 
+                    current = current.next;
+                }
+            }
+                
+        } else return false; //key was never found
+    }
 }
 
 class Node {
@@ -91,11 +126,11 @@ class Node {
 const myHashMap = new HashMap;
 
 
-console.log(myHashMap.hash("Benjamin"));
-console.log(myHashMap.hash("Gill"))
-console.log(myHashMap.hash("Tre"))
-console.log(myHashMap.hash("Seath"))
-console.log(myHashMap.hash("Ero"))
+// console.log(myHashMap.hash("Benjamin"));
+// console.log(myHashMap.hash("Gill"))
+// console.log(myHashMap.hash("Tre"))
+// console.log(myHashMap.hash("Seath"))
+// console.log(myHashMap.hash("Ero"))
 
 myHashMap.set("Gill", "I am a Panda!")
 myHashMap.set("Benjamin", "I am a cheetah!")
@@ -103,10 +138,12 @@ myHashMap.set("Tre", "I am an otter!")
 myHashMap.set("Seath", "I am a dragon RAWR")
 myHashMap.set("Ero", "I am a hamster!")
 
-console.log(myHashMap.get("Ero"))
+// console.log(myHashMap.get("Ero"))
 
-console.log(myHashMap.has("Gill")) // true
-console.log(myHashMap.has("Tinker Bell")) //false
-console.log(myHashMap.has("Ero")) // true
+// console.log(myHashMap.has("Gill")) // true
+// console.log(myHashMap.has("Tinker Bell")) //false
+// console.log(myHashMap.has("Ero")) // true
 
-console.log(myHashMap)
+
+
+console.log(myHashMap);
