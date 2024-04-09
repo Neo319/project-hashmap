@@ -115,7 +115,6 @@ class HashMap {
     }
 
     length () { //returns the number of stored keys
-        //traverse array, if any index has next as null, move to next
 
         let current = this.buckets[0];
         let counter = 0;
@@ -131,6 +130,10 @@ class HashMap {
         }
         return counter;
 
+    }
+
+    clear () { //removes all entries in the hashmap
+        this.buckets = [];
     }
 }
 
