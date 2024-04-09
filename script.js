@@ -22,23 +22,45 @@ class HashMap {
         return hashCode;
     } 
 
-    set (key, value) { //assigns a given value to a given key, overwriting if key already exists.
+    set (key, value) { //assigns a given value to a given key, chaining if key already exists
         const index = this.hash(key) // code used to access bucket
 
-
         if (!this.buckets[index]) { // if this index does not exist, create a bucket for this key
-            console.log("making new bucket index = " + index)
 
             //new node has its key as the index or hashcode of the given key,
             //its value as the given value to be stored, 
             //and its 'next' pointer as null to start with.
-            this.buckets[index] = new Node(index, value, null)
+            this.buckets[index] = new Node(key, value, null)
 
         } else { //this bucket already exists
-            console.log("bucket found of index = " + index)
-            this.buckets[index].next = new Node (index, value, null)
+            this.buckets[index].next = new Node (key, value, null)
         }
         // later: add growth to buckets array when needed? 
+    }
+
+    get (key) { //takes a given key and returns the value assigned to it, or else null
+        const index = this.hash(key)
+
+        //error checking
+        if (index < 0 || index >= this.buckets.length) {
+            throw new Error("Trying to access index out of bound");
+        }
+
+        if (this.buckets[index]) { //found key
+            let current = this.buckets[index];
+
+            while (current !== null) {
+                if (current.key == key) {
+                    return current.data;
+                } else {
+                    current = current.next;
+                }
+            }
+            return null // the key was not found at the index
+
+        } else { //index not found
+            return null
+        }
     }
 
 
@@ -66,3 +88,7 @@ myHashMap.set("Benjamin", "I am a cheetah!")
 myHashMap.set("Tre", "I am an otter!")
 myHashMap.set("Seath", "I am a dragon RAWR")
 myHashMap.set("Ero", "I am a hamster!")
+
+console.log(myHashMap.get("Ero"))
+
+console.log(myHashMap)
