@@ -113,6 +113,25 @@ class HashMap {
                 
         } else return false; //key was never found
     }
+
+    length () { //returns the number of stored keys
+        //traverse array, if any index has next as null, move to next
+
+        let current = this.buckets[0];
+        let counter = 0;
+        const length = this.buckets.length;
+
+        for (let i = 0; i <= length; i++) {
+            current = this.buckets[i];
+            while(current) {
+                console.log(current);
+                counter++;
+                current = current.next;
+            }
+        }
+        return counter;
+
+    }
 }
 
 class Node {
@@ -144,6 +163,6 @@ myHashMap.set("Ero", "I am a hamster!")
 // console.log(myHashMap.has("Tinker Bell")) //false
 // console.log(myHashMap.has("Ero")) // true
 
-
+console.log(myHashMap.length())
 
 console.log(myHashMap);
