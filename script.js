@@ -163,6 +163,24 @@ class HashMap {
         }
         return output; 
     }
+
+    entries () {
+        let output = []
+
+        let current = this.buckets[0];
+        const length = this.buckets.length;
+
+        for (let i = 0; i <= length; i++) {
+            current = this.buckets[i];
+            while(current) {
+                output.push("[" + current.key + ", " + current.data + "]")
+                current = current.next;
+            }
+        }
+        return output; 
+    }
+
+
 }
 
 class Node {
@@ -194,6 +212,6 @@ myHashMap.set("Ero", "I am a hamster!")
 // console.log(myHashMap.has("Tinker Bell")) //false
 // console.log(myHashMap.has("Ero")) // true
 
-console.log(myHashMap.values())
+console.log(myHashMap.entries())
 
 console.log(myHashMap);
