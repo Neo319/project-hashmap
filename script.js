@@ -94,16 +94,13 @@ class HashMap {
                 }
             } else { // the linked list is > 1 length
                 while (current !== null) {
-                    console.log("loop")
                     console.log(current.next.key, key)
                     
                     if (current.next.key === key) { //key is next
-                        console.log('yes')
                         current.next = current.next.next; //replaces item with comes after, or else null
                         return true;
                     }
                     else if (current.key === key) { //key is current
-                        console.log('no')
                         this.buckets[index] = current.next; //replaces first item with next
                         return true;
                     } 
@@ -123,7 +120,6 @@ class HashMap {
         for (let i = 0; i <= length; i++) {
             current = this.buckets[i];
             while(current) {
-                console.log(current);
                 counter++;
                 current = current.next;
             }
